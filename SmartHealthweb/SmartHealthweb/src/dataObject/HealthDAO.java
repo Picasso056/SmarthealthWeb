@@ -1,0 +1,194 @@
+package dataObject;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Date;
+
+
+import bean.Health;
+
+
+/*
+ * CLASS HealthDAO
+ * Description : class handling database for health
+ */
+
+public class HealthDAO {
+	/*
+	 * data member for healthDao
+	 */
+	private static java.sql.Date date;
+	DAOUtil data_object = new DAOUtil();
+	static ArrayList<String> healthname;
+	static ArrayList<String>  healthvalue;
+	
+	public static ArrayList<String> getHealthName()
+	{
+		return healthname;
+	}
+	public static void setHealthName(ArrayList<String> Healthname)
+	{
+		healthname=Healthname;
+	}
+	public static ArrayList<String> getHealthValue()
+	{
+		return healthvalue;
+	}
+	public static void setHealthValue(ArrayList<String> Healthvalue)
+	{
+		healthvalue=Healthvalue;
+	}
+	
+	public static void healthdata(Health health)
+	{
+	//	Health h=new Health();
+		DAOUtil data_object = new DAOUtil();
+		Connection con = data_object.getConnection();
+		try
+		{
+			int count;
+			date = new java.sql.Date((new Date()).getTime());
+			java.sql.Statement stat = con.createStatement();
+			System.out.println("1");
+			String s= "select * from `smarthealthdb`.`Property` where Name= '"+health.getname()+"'";
+			ResultSet rs = stat.executeQuery(s);
+			System.out.println(health.getname());
+			if(!rs.next())
+			{
+				count=1;
+				System.out.println("2");
+				 s= "select * from `smarthealthdb`.`Property` ";
+				rs = stat.executeQuery(s);
+				while(rs.next())
+				{
+					count++;
+				}
+				String description="";
+				System.out.println("3");
+				 s= "insert into `smarthealthdb`.`Property` values("+count+",'"+health.getname()+"','"+description+"')";
+				  stat.executeUpdate(s);
+			}
+			else
+			{
+				count=rs.getInt(1);
+			}
+			System.out.println("4");
+			s= "select * from `smarthealthdb`.`Datum` ";
+			rs = stat.executeQuery(s);
+			int datumids;
+			datumids=1;
+			while(rs.next())
+			{
+				datumids++;
+			}
+			System.out.println("5");
+			s= "select * from `smarthealthdb`.`Datum` where PropertyID="+count+" and Username='"+health.getusername()+"' ";
+			rs = stat.executeQuery(s);
+			if(!rs.next())
+			{
+				System.out.println("6");
+				 s= "insert into `smarthealthdb`.`Datum` values("+datumids+",'"+health.getusername()+"',"+count+",'"+health.getvalue()+"','"+date+"')";
+				  stat.executeUpdate(s);
+			}
+			else
+			{
+				System.out.println("You have already entered this medical problem");
+			}
+			data_object.closeConnection(con);
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+	/*
+	 * Function : view_healthdata
+	 *Description : view health data 
+	 */
+	public static void view_healthdata()
+	{
+		Health h=new Health();
+		DAOUtil data_object = new DAOUtil();
+		Connection con = data_object.getConnection();
+		try
+		{
+			java.sql.Statement stat = con.createStatement();
+			String s= "select p.PropertyID,p.Name,d.Value from `smarthealthdb`.`Property` p natural join `smarthealthdb`.`Datum` d where d.Username= '"+h.getusername()+"'";
+			ResultSet rs = stat.executeQuery(s);
+			while(rs.next())
+			{
+				System.out.println("ID: "+rs.getString(1)+"   Name: "+rs.getString(2)+"      Value: "+rs.getString(3));
+			}
+		
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+	/*
+	 * Function : view_friendhealthdata
+	 * Description : get friend health data
+	 */
+	public static void view_friendhealthdata(String user)
+	{
+		 ArrayList<String> healthName=new ArrayList<String>();
+		 ArrayList<String>  healthValue=new ArrayList<String>();
+		DAOUtil data_object = new DAOUtil();
+		Connection con = data_object.getConnection();
+		try
+		{
+			java.sql.Statement stat = con.createStatement();
+			String s= "select p.PropertyID,p.Name,d.Value from `smarthealthdb`.`Property` p natural join `smarthealthdb`.`Datum` d where d.Username= '"+user+"'";
+			ResultSet rs = stat.executeQuery(s);
+			while(rs.next())
+			{
+				System.out.println("ID: "+rs.getString(1)+"    Name: "+rs.getString(2)+"      Value: "+rs.getString(3));
+				healthName.add(rs.getString(2));
+				healthValue.add(rs.getString(3));
+			}
+			HealthDAO.setHealthName(healthName);
+			HealthDAO.setHealthValue(healthValue);
+		
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+	/*
+	 * Function :heatlhUpdate
+	 * Description : update health
+	 */
+	public static void health_update(Health health,String name)
+	{
+		
+		DAOUtil data_object = new DAOUtil();
+		Connection con = data_object.getConnection();
+		
+		try
+		{
+			java.sql.Statement stat = con.createStatement();
+			String s= "select * from `smarthealthdb`.`Property` p natural join `smarthealthdb`.`Datum` d where d.Username= '"+health.getusername()+"' and d.PropertyID=p.PropertyID and p.Name='"+name+"'";
+			ResultSet rs = stat.executeQuery(s);
+			if(rs.next())
+			{
+				
+				s= "Update  `smarthealthdb`.`Datum` d set d.Value='"+health.getvalue()+"' where d.Username= '"+health.getusername()+"' and d.PropertyID="+rs.getInt(1)+"";
+				 stat.executeUpdate(s);
+				 System.out.println("Value updated");
+				 }
+			else
+			{
+				System.out.println("Wrong input");
+			}
+			
+		}
+		
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+}

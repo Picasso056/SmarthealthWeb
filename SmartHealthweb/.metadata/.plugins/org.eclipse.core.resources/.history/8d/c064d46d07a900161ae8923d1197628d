@@ -1,0 +1,129 @@
+package dataObject;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+
+import bean.Person;
+
+
+
+/*
+ * CLASS EndUserDAO
+ * Description : class handling database for user
+ */
+
+public class EndUserDAO {
+	/*
+	 * Function : addEndUser
+	 * Description : add endUser
+	 */
+	public static void addEnduser(Person person)
+	{
+		//DAOUtil data_object = new DAOUtil();
+		//Connection connection = data_object.getConnection();
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/smarthealthdb","root","root");
+		
+			PreparedStatement ps ;
+			ps = connection.prepareStatement("insert into `smarthealthdb`.`EndUser` values(?,?,?)");
+			ps.setString(1, person.getUsername());
+			//ps.setInt(2, 0);
+			ps.setInt(2, Person.getKarma());
+			ps.setDate(3, person.getDate());
+			ps.executeUpdate();
+
+
+			ps = connection.prepareStatement("insert into `smarthealthdb`.`User` values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			ps.setString(1, person.getUsername());
+			ps.setString(2, person.getPassword());
+			ps.setString(3, person.getPrimary_email());
+			ps.setString(4, person.getSecondary_email());
+			ps.setString(5, person.getFirst_name());
+			ps.setString(6, person.getLast_name());
+			ps.setString(7, person.getAbout_me());
+			ps.setString(8, person.getURL1());
+			ps.setString(9, person.getURL2());
+			ps.setString(10, person.getURL3());
+			ps.setString(11, person.getPostal_address());
+			ps.setString(12, person.getPostal_address());
+			ps.setString(13, person.getPostal_address());
+			ps.setString(14, person.getPostal_address());
+			ps.setString(15, person.getPostal_address());
+			ps.setInt(16, 1);
+			ps.setInt(17, person.getIs_active());
+			ps.executeUpdate();
+			System.out.println("Personal Details of EndUser has been submitted");
+			//data_object.closeConnection(connection);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+
+	}
+	/*
+	 * Function : updateEndUser
+	 * Description : update end user
+	 */
+	public static void updateEndUser(Person person)
+	{
+		DAOUtil data_object = new DAOUtil();
+		Connection connection = data_object.getConnection();
+		try
+		{
+			PreparedStatement ps ;
+			ps=connection.prepareStatement("update `smarthealthdb`.`User` set Password=?,Email1=?,Email2=?, FirstName=?, LastName=?, AboutMe=?, PhotoURL1=?, PhotoURL2=?,PhotoURL3=?, StreetNumber=?,StreetName=?, MajorMunicipality=?, GoverningDistrict=?,PostalArea=?,Status=? where Username=?");
+
+		    ps.setString(1, person.getPassword());
+		    ps.setString(2, person.getPrimary_email());
+		    ps.setString(3, person.getSecondary_email());
+		    ps.setString(4, person.getFirst_name());
+		    ps.setString(5, person.getLast_name());
+		    ps.setString(6, person.getAbout_me());
+		    ps.setString(7, person.getURL1());
+		    ps.setString(8, person.getURL2());
+		    ps.setString(9, person.getURL3());
+		    ps.setString(10, person.getPostal_address());
+		    ps.setString(11, person.getPostal_address());
+		    ps.setString(12, person.getPostal_address());
+		    ps.setString(13, person.getPostal_address());
+		    ps.setString(14, person.getPostal_address());
+		     ps.setInt(15, person.getIs_active());
+		    ps.setString(16,person.getUsername());
+		    
+		
+		    
+		    if(ps.executeUpdate()==0)
+		    	System.out.println("Person details not updated ");
+			else
+			{
+				System.out.println("Person details updates successfully");
+			}	
+		   
+		    ps=connection.prepareStatement("update `smarthealthdb`.`EndUser` set Karma=? where Username=?");
+		    ps.setInt(1,person.getKarma());
+		    ps.setString(2, person.getUsername());
+		   
+		    if(ps.executeUpdate()==0)
+		    	System.out.println("Person details not updated ");
+			else
+			{
+				System.out.println("Person details updates successfully");
+			}
+		    
+		    data_object.closeConnection(connection);
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	
+	}
+
+}
+	
+	
+
+

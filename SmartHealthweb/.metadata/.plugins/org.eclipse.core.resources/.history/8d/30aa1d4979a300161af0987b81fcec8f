@@ -1,0 +1,15 @@
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Calendar;
+
+
+public class tryu {
+	
+	public static void main(String args[])
+	{
+		Timestamp t = new Timestamp(Calendar.getInstance().getTime().getTime());
+		
+		System.out.println(t);
+	}
+
+}

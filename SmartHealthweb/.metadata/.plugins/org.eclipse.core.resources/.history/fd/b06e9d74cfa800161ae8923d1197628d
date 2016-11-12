@@ -1,0 +1,178 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Smart Health</title>
+        
+
+        <style>
+            body{
+                background: url("Smart.png") no-repeat center center fixed;
+               
+                background-position: 10px 60px;
+                -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+            }
+            input#mail:valid {
+                background-color: green;
+                color:white;
+            }
+            input#mail:invalid {
+                background-color: #fa8072;
+                color:white;
+            }
+            input#mail::-webkit-input-placeholder{
+            
+                color:white;
+            }
+           
+            .button,.button1{
+                z-index: 2;
+                position: fixed;
+                left:1200px;
+                top:9px;
+                width:70px;
+                height:30px;
+                background-color:#fff;
+                -moz-border-radius:6px;
+                -webkit-border-radius:6px;
+                border-radius:6px;
+                display:inline-block;
+                color:#e8cd15;
+                font-family:Helvetica;
+                font-size:20px;
+                font-weight:700;
+                padding:6px 24px;
+                text-decoration:none;
+                //text-shadow:1px 1px 0 #fff;
+                text-align:center;
+                line-height:30px;
+
+            }
+            .button:hover ,.button1:hover {
+                background-color: #17bfaf;
+                color: white;
+                text-shadow: none;
+            }
+            .button1{
+                position: fixed;
+                left:1000px;
+                top:9px;
+            }
+            div#header{
+                position:fixed;
+                top:0px;
+                left:0px;
+                right:0px;
+                z-index:1;
+                // background-color: #fd5d54;
+                background-color: #e8cd15;
+                //background-color: #17bfaf;
+                height:60px;
+                color : white;
+                text-align:left;
+                line-height:60px;
+                font-family: "Comic Sans MS", cursive, sans-serif;;
+                font-size: 20px;
+                font-weight:700;
+                transition: 1s;
+            }
+            
+            h1{
+                position:absolute;
+                top:340px;
+                left:80px;
+                font-family: 'Helvetica Neue', sans-serif;
+                color:white;
+                font-size: 30px;
+                font-weight: bold;
+            }
+            div#logo{
+                position:fixed;
+                top: 10px;
+                left: 10px;
+                z-index:1;
+                transition: 2s;
+            }
+            
+            body,html {
+                margin:0;
+                padding:0;
+            }
+            div#form{
+                position:absolute;
+                top:100px;
+                left:100px;
+                //border: solid 1px white;
+                padding:30px;
+                margin-right:100px;
+                font-family: Tahoma, Geneva, sans-serif;
+                color:violet;
+                margin-top:10px;
+                margin-left:400px;
+                transition:2s;
+            }
+            input{
+
+                border: solid 3px blue;
+                width: 400px;
+                height:20px;
+                padding:8px;
+                margin-left: 10px;
+                font-family: Tahoma, Geneva, sans-serif;
+                color:grey;
+                border-radius:4px;
+            }
+            input.radio{
+                height: 20px;
+                width: 20px;
+                border: none;
+                margin-left: 40px;
+            }
+            input#register
+            {	
+                Background:#fd5d54;
+                padding:2px;
+                color:white;
+                width:100px;
+                transition:1s;
+                margin-left:113px;
+            }
+            input#register:hover
+            {
+                Background:#40e0d0;
+                transition:1s;
+                cursor: pointer;
+            }
+            
+
+        </style>
+    </head>
+    <body>
+        <h1>Register Yourself!</h1>
+        <div id="header"><p >Smart Health</font></div>
+       
+        <a href="http://www.facebook.com/" target="_blank" class="button">Help</a>
+        <a href="project.html" class="button1">Login</a>
+        <div id="form" >
+            <form action="register" method="POST">
+
+                Username&nbsp; :*<input type="text" placeholder="Enter your First Name" name="uname" autofocus required><br><br>
+                Password&nbsp; :* <input type="password" placeholder="Enter your Password" name="pass" required><br><br>
+                EmailId 1&nbsp; :* <input id="mail" type="email" placeholder="Enter your email-id" name="email1" required><br><br>
+                EmailId 2&nbsp; :* <input id="mail" type="email" placeholder="Enter your email-id" name="email2" required><br><br>
+                First Name :*<input type="text" placeholder="Enter your First Name" name="firstname" autofocus required><br><br>
+                Last Name :* <input type="text" placeholder="Enter your Last Name" name="lastname" required><br><br>
+                About Me&nbsp; :* <input type="text" placeholder="Enter your Last Name" name="about" required><br><br>
+                Photo url1&nbsp; :*<input type="text" placeholder="Enter your First Name" name="url1" autofocus required><br><br>
+                Photo url2&nbsp; :* <input type="text" placeholder="Enter your Last Name" name="url2" required><br><br>
+                Photo url3&nbsp; :*<input type="text" placeholder="Enter your First Name" name="url3" autofocus required><br><br>
+                Address&nbsp;&nbsp;&nbsp; :* <input type="text" placeholder="Enter your Last Name" name="address" required><br><br>
+                <input id="register" type="submit" value="Register Me" style="height: 32px" name="register">
+            </form>
+        </div>
+</body>
+</html>

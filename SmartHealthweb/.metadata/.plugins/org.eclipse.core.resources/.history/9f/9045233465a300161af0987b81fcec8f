@@ -1,0 +1,122 @@
+package bean;
+
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.Scanner;
+
+import dataObject.CommentDAO;
+
+public class Comment {
+
+
+	private String Username;
+	  private Date TimeCreated;
+	  private String Commenter;
+	  private java.sql.Date CommentCreated;
+	  private String Text;
+	  private String PhotoLocation;
+	  private String LinkLocation;
+	  private String VideoLocation;
+	  
+	  Scanner in = new Scanner(System.in);
+	
+	  public Comment(){
+		
+	}
+	  
+	  public Comment(String username, Date timeCreated,
+			String commenter, java.sql.Date commentCreated, String text,
+			String photoLocation, String linkLocation, String videoLocation) {
+		
+		Username = username;
+		TimeCreated = timeCreated;
+		Commenter = commenter;
+		CommentCreated = commentCreated;
+		Text = text;
+		PhotoLocation = photoLocation;
+		LinkLocation = linkLocation;
+		VideoLocation = videoLocation;
+	}
+	  
+	  
+	public String getUsername() {
+		return Username;
+	}
+	public void setUsername(String username) {
+		Username = username;
+	}
+	public Date getTimeCreated() {
+		return TimeCreated;
+	}
+	public void setTimeCreated(Date timeCreated) {
+		TimeCreated = timeCreated;
+	}
+	public String getCommenter() {
+		return Commenter;
+	}
+	public void setCommenter(String commenter) {
+		Commenter = commenter;
+	}
+	public Date getCommentCreated() {
+		return CommentCreated;
+	}
+	public void setCommentCreated(Date commentCreated) {
+		CommentCreated = commentCreated;
+	}
+	public String getText() {
+		return Text;
+	}
+	public void setText(String text) {
+		Text = text;
+	}
+	public String getPhotoLocation() {
+		return PhotoLocation;
+	}
+	public void setPhotoLocation(String photoLocation) {
+		PhotoLocation = photoLocation;
+	}
+	public String getLinkLocation() {
+		return LinkLocation;
+	}
+	public void setLinkLocation(String linkLocation) {
+		LinkLocation = linkLocation;
+	}
+	public String getVideoLocation() {
+		return VideoLocation;
+	}
+	public void setVideoLocation(String videoLocation) {
+		VideoLocation = videoLocation;
+	}
+	
+	void getComment(User user,Post post)
+	{
+		System.out.println("Please enter the comment");
+		Username = post.getUsername();
+		TimeCreated = post.getTimeCreated();
+		Commenter = user.getUsername();
+		CommentCreated = new Timestamp((new Date()).getTime());
+		System.out.println("Enter the text : ");
+		Text = in.nextLine();
+		System.out.println("Enter the photo location :");
+		PhotoLocation = in.nextLine();
+		System.out.println("Enter the video location :");
+		VideoLocation = in.nextLine();
+		System.out.println("Enter the link location :");
+		LinkLocation = in.nextLine();
+		CommentDAO.addComment(this);
+	}
+	
+	void printComment()
+	{
+		System.out.println("comment");
+		System.out.println("Username of Post" + Username);
+		System.out.println("Time of creationof post" + TimeCreated);
+		System.out.println("commneter" + Commenter);
+		System.out.println("Comment created on" + CommentCreated);
+		System.out.println("Text : "+ Text);
+		System.out.println("photo location :"+ PhotoLocation);
+		System.out.println("video location :" + VideoLocation);
+		System.out.println("link location :" + LinkLocation);
+				
+	}
+}

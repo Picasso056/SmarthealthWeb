@@ -1,0 +1,61 @@
+package connector;
+
+import java.io.IOException;
+import java.util.Date;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import bean.Post;
+import bean.User;
+
+/**
+ * Servlet implementation class addpost
+ */
+@WebServlet("/addpost")
+public class addpost extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public addpost() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		HttpSession session=request.getSession();
+		User user=  (User)session.getAttribute("user");
+		
+		System.out.println("ADD");
+		
+		  String username = user.getUsername();	
+		  String text = request.getParameter("text");
+		  String video = request.getParameter("videolocztion");
+		  String photo = request.getParameter("photolocation");
+		  String link = request.getParameter("linklocation");
+		  java.sql.Date date = new java.sql.Date((new Date()).getTime());
+		  String id = (String)session.getAttribute("id");
+		  System.out.println("Inside add "+ id);
+		//  Post post = new Post(username,text,photo,link,video,date);
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+	}
+
+}

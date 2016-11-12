@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>HTML5 Navigation Bar Example - Example 1</title>
+    <link href="style3.css" rel="stylesheet"/>
+</head>
+<style>
+
+#logo{
+    position: absolute;
+    right:10px;
+    bottom: 10px;
+}
+body{
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    font-family: "Lucida Grande", "Helvetica Nueue", Arial, sans-serif;
+}
+nav {
+    background-color: #333;
+    border: 1px solid #333;
+    color: #fff;
+    display: block;
+    margin: 0;
+    overflow: hidden;
+}
+nav ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+nav ul li {
+    margin: 0;
+    display: inline-block;
+    list-style-type: none;
+    transition: all 0.2s;
+}
+
+nav > ul > li > a {
+    color: #aaa;
+    display: block;
+    line-height: 2em;
+    padding: 0.5em 2em;
+    text-decoration: none;
+
+}
+
+nav li > ul{
+    display : none;
+    margin-top:1px;
+    background-color: #bbb;
+
+}
+
+nav li > ul li{
+    display: block;
+}
+
+nav  li > ul li a {
+    color: #111;
+    display: block;
+    line-height: 2em;
+    padding: 0.5em 2em;
+    text-decoration: none;
+}
+
+nav li:hover {
+    background-color: #666;
+}
+nav li:hover > ul{
+    position:absolute;
+    display : block;
+}
+nav li > ul > li ul  {
+    display: none;
+    background-color: #888;
+}
+nav li > ul > li:hover > ul  {
+    position:absolute;
+    display : block;
+    margin-left:100%;
+    margin-top:-3em;
+}
+body {font-family: "Lato", sans-serif;}
+
+
+
+ input#mail::-webkit-input-placeholder{
+            
+                color:grey;
+            }
+            div#u{
+             position:absolute;
+                 margin-left: 20px;
+                margin-top:4px;
+                 width: 150px;
+                height:30px;
+               
+                background-color: #307493;
+                color : #38acec;
+                text-align:center;
+                line-height:29px;
+                font-family: "Comic Sans MS", cursive, sans-serif;;
+                font-size: 18px;
+                font-weight:700;
+                transition: 1s;
+            }
+              
+            
+                input#r{
+
+                border: solid 1px #ffa62f;
+                width: 250px;
+                height:14px;
+                
+                padding:6px;
+                margin-left: 200px;
+                margin-top:4px;
+                font-family: Tahoma, Geneva, sans-serif;
+                color:grey;
+                border-radius:4px;
+            }
+            input#r1{
+
+                border: solid 1px #ffa62f;
+                width: 250px;
+                height:14px;
+                
+                padding:6px;
+                margin-left: 200px;
+                margin-top:5px;
+                font-family: Tahoma, Geneva, sans-serif;
+                color:grey;
+                border-radius:4px;
+            }
+            div#q{
+            margin-left:200px;
+            }
+               input#register
+            {	
+                Background:#fd5d54;
+                padding:2px;
+                color:white;
+                width:200px;
+                transition:1s;
+                margin-left:503px; 
+                margin-top:10px; 
+               
+            }
+            .button,.button1{
+               background-color:#38acec;
+              left:1500px;
+                top:11px;
+                width:70px;
+                height:30px;
+            	
+                position: absolute; 
+                left:1000px;
+                top:9px;
+                border-radius:4px;
+                display:inline-block;
+                 color:#e8cd15;
+                font-family:Helvetica;
+                font-size:20px;
+                font-weight:700;
+                padding:6px 24px;
+                text-decoration:none;
+               margin-left:150px;
+                text-align:center;
+                line-height:30px;
+            }
+            
+input#mail{
+
+                border: solid 1px #ffa62f;
+                width: 250px;
+                height:15px;
+                padding:6px;
+                margin-left: 200px;
+                margin-top:4px;
+                font-family: Tahoma, Geneva, sans-serif;
+                color:grey;
+                border-radius:4px;
+            }
+         
+            input#password{
+            border: solid 1px #ffa62f;
+               
+                height:28px;
+                padding:6px;
+                
+             
+                font-family: Tahoma, Geneva, sans-serif;
+                color:grey;
+                border-radius:4px;
+                margin-left:20px;
+            
+            }
+               input#login{
+            border: solid 1px #ffa62f;
+                
+                height:28px;
+                padding:6px;
+       
+           
+                font-family: Tahoma, Geneva, sans-serif;
+                color:grey;
+                border-radius:4px;
+            margin-left:600px;
+            }
+            div#header{
+                position:absolute;
+                top:0px;
+                left:0px;
+                right:0px;
+           
+                background-color: #ffa62f;
+               
+                height:60px;
+                color : white;
+                text-align:left;
+                line-height:60px;
+                font-family: "Comic Sans MS", cursive, sans-serif;;
+                font-size: 20px;
+                font-weight:700;
+            }
+            
+            div#qualifications{
+                position:absolute;
+                top:730px;
+                left:50px;
+                right:1150px;
+                background-color: #38acec;
+                height:30px;
+                color : #ffa62f;
+                text-align:center;
+                line-height:29px;
+                font-family: "Comic Sans MS", cursive, sans-serif;;
+                font-size: 18px;
+                font-weight:700;
+                transition: 1s;
+            }
+            select{
+             border: solid 1px #ffa62f;
+                width: 415px;
+                height:38px;
+                
+                padding:6px;
+                margin-left: 600px;
+                margin-top:5px;
+                font-family: Tahoma, Geneva, sans-serif;
+                color:grey;
+                border-radius:4px;
+            }
+            li#logout{
+            align:right;
+            
+            }
+           
+
+</style>
+<body>
+<%
+if (session.getAttribute("uname")==null)
+{
+ %>
+ <script type="text/javascript">
+ window.location.href="firstpage.jsp"</script>
+ <%
+ }
+  %>
+<nav>
+    <ul>
+        <li>
+            <a href="homeservlet" action="homep">Home</a>
+            
+            
+        </li>
+       
+         <li>
+            <a href="shop.html">Discussions</a>
+            <ul>
+            <li><a href ="CreateForum">Add Forum</a></li>
+            <li><a href="GetAllForum">View Forums</a></li>
+            <li><a href="GetAllPost">View Post</a></li>
+            <li><a href="AddPost">Add Post</a></li>
+            <li><a href="AddComment">Add comment</a></li>
+            </ul>
+        </li>
+<li>
+        <a id="logout" href="logoutservlet" >Logout</a>
+        </li>
+        
+    </ul>
+    
+</nav>
+<div id="London" class="tabcontent">
+ <div id="form">
+            <form action="update" method="POST"> 
+
+       <div id="u">Username </div>
+       
+       <input id="r" disabled="disabled" type="text" placeholder=${user.getUsername()} name="uname" autofocus><br><br>
+       <div id="u">Password&nbsp; </div> 
+       <input id="r"  type="password" placeholder=${user.getPassword()} name="pwd" ><br><br>
+        <div id="u">EmailId 1&nbsp; </div> 
+        <input id="mail" disabled="disabled" type="email" placeholder=${user.getPrimary_email()} name="pemail" ><br><br>
+         <div id="u">EmailId 2&nbsp; </div>
+          <input id="mail" type="email" placeholder=${user.getSecondary_email()} name="semail" ><br><br>
+         <div id="u">First Name </div>
+         <input id="r" type="text" placeholder=${user.getFirst_name()} name="fname" ><br><br>
+         <div id="u">Last Name </div>
+          <input id="r" type="text" placeholder=${user.getLast_name()} name="lname" ><br><br>
+         <div id="u">About Me&nbsp; </div>
+          <input id="r" type="text" placeholder=${user.getAbout_me()} name="aboutme" ><br><br>
+         <div id="u">Photo url1&nbsp; </div>
+         <input id="r" type="text" placeholder=${user.getURL1()} name="url1"><br><br>
+         <div id="u">Photo url2&nbsp; </div> 
+         <input id="r" type="text" placeholder=${user.getURL2()} name="url2" ><br><br>
+         <div id="u">Photo url3&nbsp; </div>
+         <input id="r" type="text" placeholder=${user.getURL3()} name="url3" ><br><br>
+         <div id="u">Address&nbsp;&nbsp;&nbsp; </div>
+			<input id="r" type="text" placeholder=${user.getPostal_address()} name="address" ><br><br>
+              
+              
+			
+			<div id="u" >Contact&nbsp; </div> 
+         <input id="r1" type="text"  placeholder=${user.getContact()} name="contact"><br><br>
+         <div id="u" >Qualifications&nbsp; </div> 
+        		<input id="r" type="text" disabled="disabled" placeholder=${user.getQualification()} name="qualification" ><br><br>
+			 <input id="u" type="submit" value="Update" style="height: 32px" name="update" >
+             
+                </form>
+            
+        </div>
+</div>
+
+<p>&nbsp;</p>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+package bean;
+
+import java.util.Date;
+
+public class Rating {
+
+	
+	private String Username;
+	private Date PostTimeCreated;
+	private  String RaterUsername;
+	private  int stars;
+	
+	public Rating(String username, Date postTimeCreated, String raterUsername,
+			int stars) {
+		super();
+		Username = username;
+		PostTimeCreated = postTimeCreated;
+		RaterUsername = raterUsername;
+		this.stars = stars;
+	}
+
+	
+	public String getUsername() {
+		return Username;
+	}
+	public void setUsername(String username) {
+		this.Username = username;
+	}
+	public  Date getPostTimeCreated() {
+		return PostTimeCreated;
+	}
+	public void setPostTimeCreated(Date postTimeCreated) {
+		this.PostTimeCreated = postTimeCreated;
+	}
+	public String getRaterUsername() {
+		return RaterUsername;
+	}
+	public void setRaterUsername(String raterUsername) {
+		this.RaterUsername = raterUsername;
+	}
+	public int getStars() {
+		return stars;
+	}
+	public void setStars(int Stars) {
+		this.stars = Stars;
+	}
+	
+	public void getratingdata()
+	{
+		//TODO
+		
+	}
+	
+	
+}

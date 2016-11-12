@@ -1,0 +1,70 @@
+package connector;
+
+import java.io.IOException;
+import java.util.Date;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import dataObject.CommentDAO;
+import bean.Comment;
+import bean.User;
+
+/**
+ * Servlet implementation class addcomment
+ */
+@WebServlet("/addcomment")
+public class addcomment extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public addcomment() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		System.out.println("Entering");
+		HttpSession session=request.getSession();
+		User user=  (User)session.getAttribute("user");
+		String postusername = (String)session.getAttribute("postuser");
+		java.sql.Date postDate = (java.sql.Date)session.getAttribute("postdate");
+	
+		System.out.println("DATE:" + postDate);
+		  String username = user.getUsername();	
+		  String text = request.getParameter("text");
+		  String video = request.getParameter("videolocztion");
+		  String photo = request.getParameter("photolocation");
+		  String link = request.getParameter("linklocation");
+		  java.sql.Date date = new java.sql.Date((new Date()).getTime());
+		  
+		  Comment comment = new Comment(postusername,postDate,username,date,text,photo,link,video);
+		  
+		  System.out.println("Entering");
+		  CommentDAO.addComment(comment);
+		  System.out.println("Entering 25");
+		  RequestDispatcher rd = request.getRequestDispatcher("AllForums.jsp");
+		rd.forward(request, response);
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+	}
+
+}

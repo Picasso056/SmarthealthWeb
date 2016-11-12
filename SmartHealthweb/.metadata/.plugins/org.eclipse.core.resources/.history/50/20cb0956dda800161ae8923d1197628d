@@ -1,0 +1,210 @@
+package bean;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
+import java.util.Scanner;
+
+import dataObject.ForumDAO;
+import dataObject.PostDAO;
+
+
+public class Forum {
+
+	private int ForumId;
+	private String Topic;
+	private String URL;
+	private String Summary;
+	private Timestamp DateCreated;
+	private Timestamp DateClosed;
+	private String Createdby;
+	private String Closedby;
+	private static ArrayList<Post>post =  new ArrayList<Post>();;
+	
+	static Scanner in = new Scanner(System.in);
+	
+	public Forum(String Createdby,String topic,String Summary,String URL)
+	{
+		this.Createdby = Createdby;
+		this.Topic = topic;
+		this.Summary = Summary;
+		this.URL = URL;
+		this.DateCreated = new Timestamp((new Date()).getTime());
+		this.ForumId = getForumID();
+	}
+	
+	public Forum(int id, String topic, String summary, String URL, String user )
+	{
+		this.ForumId = id;
+		this.Topic = topic;
+		this.Summary = summary;
+		this.URL = URL;
+		this.Createdby = user;
+	}
+	
+	public Forum()
+	{
+		
+		this.DateCreated = new Timestamp((new Date()).getTime());
+		
+	}
+	
+	public int getForumID()
+	{
+		Random rand = new Random();
+		return rand.nextInt(1000);
+		
+	}
+	
+	public int getForumId() {
+		return ForumId;
+	}
+	public void setForumId(int forumId) {
+		ForumId = forumId;
+	}
+	public String getTopic() {
+		return Topic;
+	}
+	public void setTopic(String topic) {
+		Topic = topic;
+	}
+	public String getURL() {
+		return URL;
+	}
+	public void setURL(String uRL) {
+		URL = uRL;
+	}
+	public String getSummary() {
+		return Summary;
+	}
+	public void setSummary(String summary) {
+		Summary = summary;
+	}
+	public Date getDateCreated() {
+		return DateCreated;
+	}
+	public void setDateCreated(Timestamp dateCreated) {
+		DateCreated = dateCreated;
+	}
+	public Timestamp getDateClosed() {
+		return DateClosed;
+	}
+	public void setDateClosed(Timestamp dateClosed) {
+		DateClosed = dateClosed;
+	}
+	public String getCreatedby() {
+		return Createdby;
+	}
+	public void setCreatedby(String createdby) {
+		Createdby = createdby;
+	}
+	public String getClosedby() {
+		return Closedby;
+	}
+	public void setClosedby(String closedby) {
+		Closedby = closedby;
+	}
+	/*
+	public void printPost()
+	{
+		int len = post.size();
+		
+		for(int i = 0; i < len; i++)
+			post.get(i).printPostData();
+	}
+	*/
+	
+	
+	public void getForumdata(User user)
+	{
+		ForumId=ForumDAO.noOfForum();
+		System.out.println("Please enter the details to create a forum" );
+		System.out.println("Please enter the topic name ");
+		Topic = in.nextLine();
+		System.out.println("Please enter the URL ");
+		URL = in.nextLine();
+		System.out.println("Please enter the summary ");
+		Summary = in.nextLine();
+		Createdby = user.getUsername();
+		ForumDAO.addForum(this);
+	}
+	
+	public void printForumDetails()
+	{
+		System.out.println("-------Forum Data-------");
+		System.out.println("ForumID" + ForumId);
+		System.out.println("Topic :"+ Topic);
+		System.out.println("URL" + URL);
+		System.out.println("Summary" + Summary);
+		System.out.println("Created on" +DateCreated);
+		System.out.println("Created by" + Createdby);
+				
+	}
+	
+	
+	public static void createPost(User user,int forumid)
+	{
+		Post p = new Post();
+		p.Postdata(user,forumid);
+		//post.add(p);
+		System.out.println("Post created");
+		
+	}
+	
+	public static void getPostUsingUsername(User user,String username)
+	{
+		int count=1;
+		ResultSet rs;
+		rs=PostDAO.getpost(user);
+		
+		try{
+		while(rs.next())
+		{
+			
+			if( username.equals(rs.getString(1)))
+				{
+				System.out.println("ID: "+count+"      POST: "+rs.getString(4));
+				count++;
+				}
+			
+		}
+		rs=PostDAO.getpost(user);
+		if(count!=1)
+		{
+			count=1;
+			System.out.println("Enter the ID where you want to comment: ");
+			int no=in.nextInt();
+			while(rs.next())
+			{
+				if( username.equals(rs.getString(1)))
+				{
+				if(count==no)
+				{
+					Post post=new Post();
+					post.setUsername(rs.getString(1));
+					post.setTimeCreated(rs.getTimestamp(2));
+					Post.getComment(user,post);
+				}
+				else
+				count++;
+				}	
+			}
+		}
+		}
+		catch(Exception e)
+		{
+			
+		}
+		
+		
+		
+	}
+	
+	public static ArrayList<Post> getPostbyForumID(int id)
+	{
+		return PostDAO.Dao_getPostbyID(id);
+		
+	}
+}
+ 

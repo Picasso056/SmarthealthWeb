@@ -1,0 +1,55 @@
+package dataObject;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import bean.Comment;
+
+public class CommentDAO {
+
+	public static void addComment(Comment comment)
+	{
+		DAOUtil data_object = new DAOUtil();
+		Connection connection = data_object.getConnection();
+		
+		try{
+			PreparedStatement ps ;
+			ps = connection.prepareStatement("insert into `smarthealthdb`.`Comment` values(?,?,?,?,?,?,?,?)");
+					
+			ps.setString(1, comment.getUsername());
+			ps.setDate(2, (java.sql.Date)comment.getTimeCreated());
+			ps.setString(3, comment.getCommenter());
+			ps.setDate(4, (java.sql.Date)comment.getCommentCreated());
+			ps.setString(5, comment.getText());
+			ps.setString(6,comment.getPhotoLocation());
+			ps.setString(7,comment.getLinkLocation());
+			ps.setString(8,comment.getVideoLocation());
+			ps.executeUpdate();
+			
+			System.out.println("Comment has been submitted");
+			data_object.closeConnection(connection);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	public static Comment getCommentWeb(int id,String user,java.sql.Date date)
+	{
+		DAOUtil data_object = new DAOUtil();
+		Connection connection = data_object.getConnection();
+		
+		ResultSet rs;
+		try{
+			java.sql.Statement stat = connection.createStatement();
+			String s= "select * from `smarthealthdb`.`Comment` where  Post_Username='"+user+"' and Post_TimeCreated='"+date+"';"";
+			rs = stat.executeQuery(s);
+			
+		}catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+
+		
+		
+	
+}
